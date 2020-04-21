@@ -4,6 +4,15 @@ version = "0.1.0"
 authors = ["grgr-dkrk <40130327+grgr-dkrk@users.noreply.github.com>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.dev]
+panic = "abort"
+opt-level = 0
+debug = true
+lto = true
+
+[profile.release]
+panic = "abort"
+opt-level = 2
+lto = true
 
 [dependencies]
