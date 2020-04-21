@@ -2,33 +2,20 @@
 #![feature(start)]
 
 mod gba_color;
+mod graphics;
 mod rgb;
-use gba_color::GBAColor;
+
+use graphics::Graphics;
 use rgb::RGBDef;
 use rgb::RGB;
 
 #[start]
 fn main(_argc: isize, _argv: *const *const u8) -> isize {
     init_graphic();
-    let vram_address: u32 = 0x06000000;
-    let white: RGB = RGB::white();
-    let mut offset: u32 = ((80 * 240) + 118) as u32;
-    let mut vram: *mut u16 = (vram_address + (offset * 2)) as *mut u16;
-    unsafe {
-        *vram = white.convert_u16_color();
-    }
-    let dark_red: RGB = RGB::dark_red();
-    offset = ((80 * 240) + 120) as u32;
-    vram = (vram_address + (offset * 2)) as *mut u16;
-    unsafe {
-        *vram = dark_red.convert_u16_color();
-    }
-    let red: RGB = RGB::light_red();
-    offset = ((80 * 240) + 122) as u32;
-    vram = (vram_address + (offset * 2)) as *mut u16;
-    unsafe {
-        *vram = red.convert_u16_color();
-    }
+
+    let graphics: Graphics = Graphics::new();
+    graphics.draw_circle(120, 80, 20, &RGB::light_yellow());
+
     loop {}
 }
 

@@ -1,4 +1,3 @@
-// original: https://booth.pm/ja/items/492956
 use crate::rgb::RGB;
 pub trait GBAColor {
   fn convert_u16_color(&self) -> u16;
