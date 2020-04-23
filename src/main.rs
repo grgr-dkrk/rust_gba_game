@@ -14,7 +14,7 @@ fn main(_argc: isize, _argv: *const *const u8) -> isize {
     init_graphic();
 
     let graphics: Graphics = Graphics::new();
-    graphics.draw_circle(120, 80, 20, &RGB::light_yellow());
+    graphics.draw_gradient(&RGB::light_yellow());
 
     loop {}
 }

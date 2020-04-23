@@ -64,4 +64,15 @@ impl Graphics {
       f += (4 * y + 2) as i32;
     }
   }
+
+  pub fn paint_all(&self, color: &RGB) {
+    let mut x: u16 = 0;
+    let mut y: u16 = 0;
+
+    for y in 0..self.screen_y {
+      for x in 0..self.screen_x {
+        self.draw_dot(x, y, color);
+      }
+    }
+  }
 }
