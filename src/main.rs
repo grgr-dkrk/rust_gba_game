@@ -3,18 +3,20 @@
 
 mod gba_color;
 mod graphics;
+mod picture;
 mod rgb;
 
 use graphics::Graphics;
-use rgb::RGBDef;
-use rgb::RGB;
+use picture::SAMPLE_PICT;
+// use rgb::RGBDef;
+// use rgb::RGB;
 
 #[start]
 fn main(_argc: isize, _argv: *const *const u8) -> isize {
     init_graphic();
 
     let graphics: Graphics = Graphics::new();
-    graphics.draw_circle(120, 80, 20, &RGB::light_yellow());
+    graphics.paint_pict(SAMPLE_PICT);
 
     loop {}
 }

@@ -64,4 +64,24 @@ impl Graphics {
       f += (4 * y + 2) as i32;
     }
   }
+
+  pub fn paint_all(&self, color: &RGB) {
+    for y in 0..self.screen_y {
+      for x in 0..self.screen_x {
+        self.draw_dot(x, y, color);
+      }
+    }
+  }
+
+  pub fn paint_pict(&self, pict: [u16; 38400]) {
+    for y in 0..self.screen_y {
+      for x in 0..self.screen_x {
+        unsafe {
+          (self.vram_address as *mut u16)
+            .offset((y * self.screen_x + x) as isize)
+            .write_volatile(pict[(y * self.screen_x + x) as usize])
+        }
+      }
+    }
+  }
 }
