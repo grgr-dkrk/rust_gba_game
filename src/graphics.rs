@@ -66,12 +66,21 @@ impl Graphics {
   }
 
   pub fn paint_all(&self, color: &RGB) {
-    let mut x: u16 = 0;
-    let mut y: u16 = 0;
-
     for y in 0..self.screen_y {
       for x in 0..self.screen_x {
         self.draw_dot(x, y, color);
+      }
+    }
+  }
+
+  pub fn paint_pict(&self, pict: [u16; 38400]) {
+    for y in 0..self.screen_y {
+      for x in 0..self.screen_x {
+        unsafe {
+          (self.vram_address as *mut u16)
+            .offset((y * self.screen_x + x) as isize)
+            .write_volatile(pict[(y * self.screen_x + x) as usize])
+        }
       }
     }
   }
