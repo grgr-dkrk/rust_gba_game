@@ -1,23 +1,22 @@
-// original: https://booth.pm/ja/items/492956
+use crate::color::GBAColor;
+use crate::color::RGB;
 
-use crate::gba_color::GBAColor;
-use crate::rgb::RGB;
-
-pub struct Graphics {
+pub struct Vram {
   vram_address: u32,
   screen_x: u16,
   screen_y: u16,
 }
 
-impl Graphics {
+impl Vram {
   pub fn new() -> Self {
-    Graphics {
+    Vram {
       vram_address: 0x06000000,
       screen_x: 240,
       screen_y: 160,
     }
   }
 
+  // original: https://booth.pm/ja/items/492956
   pub fn draw_dot(&self, x: u16, y: u16, color: &RGB) {
     let offset: u32 = ((y * self.screen_x) + x) as u32;
     let vram: *mut u16 = (self.vram_address + (offset * 2)) as *mut u16;
@@ -26,6 +25,7 @@ impl Graphics {
     }
   }
 
+  // original: https://booth.pm/ja/items/492956
   pub fn draw_box(&self, x: u16, y: u16, width: u16, height: u16, color: &RGB) {
     for offset_y in 0..height {
       for offset_x in 0..width {
@@ -37,6 +37,7 @@ impl Graphics {
     }
   }
 
+  // original: https://booth.pm/ja/items/492956
   pub fn draw_circle(&self, center_x: u16, center_y: u16, r: u16, color: &RGB) {
     let mut x: u16 = r;
     let mut y: u16 = 0;
