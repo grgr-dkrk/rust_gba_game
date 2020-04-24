@@ -2,18 +2,18 @@
 #![feature(start)]
 
 mod color;
+mod io;
 mod picture;
-mod screen;
 mod vram;
 
+use io::Io;
 use picture::SAMPLE_PICT;
-use screen::Screen;
 use vram::Vram;
 
 #[start]
 fn main(_argc: isize, _argv: *const *const u8) -> isize {
-    let screen = Screen::new();
-    screen.mode3_init();
+    let io = Io::new();
+    io.screen_mode3_init();
 
     let vram: Vram = Vram::new();
     vram.paint_pict(SAMPLE_PICT);
