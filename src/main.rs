@@ -18,7 +18,10 @@ fn main(_argc: isize, _argv: *const *const u8) -> isize {
     let vram: Vram = Vram::new();
     vram.paint_pict(SAMPLE_PICT);
 
-    loop {}
+    loop {
+        // TODO: very slowly
+        io.wait_for_vsnc();
+    }
 }
 
 #[panic_handler]
