@@ -19,6 +19,7 @@ fn main(_argc: isize, _argv: *const *const u8) -> isize {
     vram.paint_pict(SAMPLE_PICT);
 
     loop {
+        // TODO: very slowly
         io.wait_for_vsnc();
     }
 }
